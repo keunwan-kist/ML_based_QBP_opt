@@ -1,4 +1,4 @@
-# ML‑Guided QBP Optimization Pipeline
+# ML‑Guided QBP Optimization with GA
 
 A quick‑start workflow that couples Rosetta structure generation with machine‑learning‑guided sequence optimization.
 
@@ -8,7 +8,7 @@ A quick‑start workflow that couples Rosetta structure generation with machine�
 
 | Software | Tested Version |
 |----------|---------------|
-| **Rosetta** (for RosettaScript) | 2020.28.post.dev+102.master.43e678f |
+| **RosettaScript** (Rosetta) | 2020.28.post.dev+102.master.43e678f |
 | **Ranger** (R package) | 0.8.0 |
 | **PRROC** (R package) | 1.3 |
 
