@@ -17,13 +17,21 @@ tot_n = nrow(data)
 combined_data = cbind(data,ddg)
 nd = ncol(combined_data)
 
-# ddg prediction model, change the col name to energy or sc 
-data.rb <- ranger(ddg ~., combined_data,num.trees = 100)
+if(model_name == "ddg"){
+	# ddg prediction model, change the col name to energy or sc 
+	data.rb <- ranger(ddg ~., combined_data,num.trees = 100)
+}else if(model_name == "energy"){
+	data.rb <- ranger(energy ~., combined_data,num.trees = 100)
+}else if(model_name == "sc"){
+	data.rb <- ranger(sc ~., combined_data,num.trees = 100)
+}else{
+	stop("Model name incorrect!")
+}
 
 print(data.rb)
 
 df <- data.frame(pred = data.rb$predictions, real = combined_data[,nd])
-write.table(df, file="oob_pred.txt",quote=F,col.names=F,row.names=F)
+write.table(df, file=paste(model_name,".oob_pred.txt",sep=""),quote=F,col.names=F,row.names=F)
 name_str=paste(model_name,".pred_model.ranger",sep="")
 print(paste(name_str,"model saved as a file"))
 save(data.rb, file=name_str)

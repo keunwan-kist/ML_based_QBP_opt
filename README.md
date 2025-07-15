@@ -68,7 +68,8 @@ All paths below are relative to the repository root.
 
 	```bash
 	Rscript ../scripts/reg_model_gen.r ../input_data/seq_ddg_values_3nd.feat.mat ddg
-	mv ddg.pred_model.ranger ../pred_model/
+	Rscript ../scripts/reg_model_gen.r ../input_data/seq_ddg_values_3nd.feat.mat energy
+	mv ddg.pred_model.ranger energy.pred_model.ranger ../pred_model/
 	# Saved model : ddg.pred_model.ranger
 	# Pre‑trained models are available in ./pred_model/
 	```
