@@ -11,11 +11,13 @@ A quick‑start workflow that couples Rosetta structure generation with machine�
 | **RosettaScript** (Rosetta) | 2020.28.post.dev+102.master.43e678f |
 | **Ranger** (R package) | 0.8.0 |
 | **PRROC** (R package) | 1.3 |
+| **Peptides** (R package) | 2.4.1 |
+| **hash** (R package) | 2.2.6.1 |
 
 Install Rosetta as described on the [Rosetta Commons](https://www.rosettacommons.org/) site and the R packages via CRAN:
 
 ```r
-install.packages(c("ranger", "PRROC"))
+install.packages(c("ranger", "PRROC", "Peptides", "hash"))
 ```
 
 ---
@@ -64,6 +66,12 @@ All paths below are relative to the repository root.
    # Scores in the PDB file: lig_ddg, lig_sc, score_filter
    ```
 
+5. **Sequence Feature Generation(t-scale)**
+
+	```bash
+	Rscript ../scripts/seqfeat_gen.r ../input_data/test.fasta > test.out.mat
+	```
+
 5. **Model Training and Saving**
 
 	```bash
@@ -87,11 +95,6 @@ All paths below are relative to the repository root.
 
 ## Additional Utilities
 
-### Sequence Feature Generation (5 × L)
-
-```bash
-Rscript ../scripts/seqfeat_gen.r ../input_data/test.fasta > test.out.mat
-```
 
 ---
 
