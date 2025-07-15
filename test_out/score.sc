@@ -1,0 +1,3 @@
+SEQUENCE: 
+SCORE: total_score dslf_fa13    fa_atr    fa_dun   fa_elec fa_intra_rep fa_intra_sol_xover4              fa_rep              fa_sol hbond_bb_sc hbond_lr_bb    hbond_sc hbond_sr_bb     lig_ddg      lig_sc lig_sc_int_area lk_ball_wtd       omega     p_aa_pp pro_close rama_prepro         ref score_filter yhh_planarity description 
+SCORE:    -825.489     0.000 -1359.275   222.407  -423.872        2.896              41.189             133.256             777.140     -49.903     -68.400     -26.645     -91.686     -24.202       0.839         293.163     -38.736       5.111     -48.958    16.703      26.398      56.287     -825.489         0.600 complex.mut.1wdna_0001_0001_0001

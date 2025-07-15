@@ -1,0 +1,67 @@
+<ROSETTASCRIPTS>
+    <SCOREFXNS>
+        <ScoreFunction name="r15" weights="ref2015" />
+        <ScoreFunction name="score_cst" weights="ref2015" >
+			<Reweight scoretype="coordinate_constraint" weight="1" />
+            <Reweight scoretype="atom_pair_constraint" weight="1" />
+        </ScoreFunction>
+        <ScoreFunction name="score_cart_cst" weights="ref2015_cart" >
+			<Reweight scoretype="coordinate_constraint" weight="1" />
+            <Reweight scoretype="atom_pair_constraint" weight="1" />
+        </ScoreFunction>
+		<ScoreFunction name="softrep_cst" weights="soft_rep" >
+			<Reweight scoretype="coordinate_constraint" weight="1" />
+            <Reweight scoretype="atom_pair_constraint" weight="1" />
+        </ScoreFunction>
+    </SCOREFXNS>
+
+    <TASKOPERATIONS>
+ 		<ReadResfile name="RRF"/>
+        <InitializeFromCommandline name="cmdline" />
+        <IncludeCurrent name="current" />
+        <LimitAromaChi2 name="arochi" />
+        <ExtraRotamersGeneric name="ex1_ex2" ex1="1" ex2="1"/>
+		<RestrictToRepacking name="only_repack" />
+    </TASKOPERATIONS>
+
+	<FILTERS>
+		<ScoreType name="score_filter" scorefxn="r15" score_type="total_score" confidence="1" threshold="0"/>
+		<Geometry name="geom" confidence="0" />
+    </FILTERS>
+
+    <MOVERS>
+		<AddConstraintsToCurrentConformationMover name="cst_all"/> 
+		<PackRotamersMover name="packrot_soft" scorefxn="softrep_cst" task_operations="RRF,cmdline,current,arochi,ex1_ex2" />
+		<PackRotamersMover name="packrot" scorefxn="score_cst" task_operations="RRF,cmdline,current,arochi,ex1_ex2" />
+		<PackRotamersMover name="packrot_soft_only" scorefxn="softrep_cst" task_operations="only_repack,cmdline,current,arochi,ex1_ex2" />
+		<NormalModeRelax name="nma_relax" cartesian="true" centroid="false" scorefxn="r15" nmodes="5" mix_modes="false" pertscale="1" randomselect="false" relaxmode="min" cartesian_minimize="false" />
+        <MinMover name="min_cart" scorefxn="score_cart_cst" chi="1" bb="1" cartesian="1" type="lbfgs_armijo_nonmonotone" tolerance="0.00001" max_iter="2000" />
+		<ClearConstraintsMover name="nocst" />
+
+    </MOVERS>
+
+    <APPLY_TO_POSE>
+    </APPLY_TO_POSE>
+
+    <PROTOCOLS>
+		Some movers are turned off due to the simplified test setup
+        
+		Add mover="packrot_soft"/>
+		
+		Add mover="cst_all"/>			
+        Add mover="min_cart"/>		
+		Add mover="packrot"/>
+        Add mover="min_cart"/>
+		Add mover="nocst"/>	
+        
+		Add mover="nma_relax"/>
+		<Add mover="packrot_soft_only"/>
+        <Add mover="min_cart"/>
+			
+		<Add filter="score_filter"/>	
+		<Add filter="geom"/>	
+    </PROTOCOLS>
+
+    <OUTPUT />
+
+</ROSETTASCRIPTS>
